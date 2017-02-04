@@ -7,8 +7,8 @@
  */
 class Connection {
 
-    private $mysqli;
-    
+    public $mysqli;
+ 
     /**
      * Constructor
      */
@@ -26,9 +26,9 @@ class Connection {
         
         // Checking whether the connection succeeded
         if ($this->mysqli->connect_error) {
-            die('Connection unsuccessful. Error: ' . $this->mysqli->connect_error);
+            die('Connection unsuccessful. Error: ' . $this->mysqli->connect_error .'<br>');
         }
-        echo 'Connection successful.';
+        echo 'Connection successful.<br>';
         
         $this->mysqli->set_charset('utf8');
     }
@@ -38,7 +38,7 @@ class Connection {
      * @param string $sql
      * @return bool
      */
-    public function query($sql){
+    public function query($sql){                                                // ????????????????
         
         $result = $this->mysqli->query($sql);
         
@@ -53,11 +53,12 @@ class Connection {
      * close
      * @return bool
      */
-    public function close(){
+    public function close(){                                                    // ????????????????
         
          $this->mysqli->close();
          echo '<br>Connection closed.';
          
     }
     
+   
 }

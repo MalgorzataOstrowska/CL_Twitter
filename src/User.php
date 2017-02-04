@@ -112,6 +112,12 @@ class User {
         return false;
     }
     
+    /**
+     * static loadUserById
+     * @param Connection $connection
+     * @param int $id
+     * @return \User
+     */
     static public function loadUserById(Connection $connection, $id){
         
         $sql = "SELECT * FROM User WHERE id=$id";
@@ -130,5 +136,27 @@ class User {
             return $loadedUser;
         }
         return null;
-    }    
+    }
+    
+    static public function loadAllUsers(Connection $connection){
+        
+        $sql = "SELECT * FROM User";
+        $ret = [];
+        $result = $connection->query($sql);
+        
+        if($result == true && $result->num_rows != 0){
+            
+            foreach($result as $row){
+                
+                $loadedUser = new User();
+                $loadedUser->id = $row['id'];
+                $loadedUser->username = $row['username'];
+                $loadedUser->hashedPassword = $row['hashed_password'];
+                $loadedUser->email = $row['email'];
+                
+                $ret[] = $loadedUser;
+            }
+        }
+        return $ret;
+    }
 }

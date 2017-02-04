@@ -20,7 +20,9 @@
     
     // loadUserById test
     var_dump(User::loadUserById($connection,40));
-        
+    
+    // loadAllUsers test
+    var_dump(User::loadAllUsers($connection));
 ?>
 
 <!DOCTYPE html>

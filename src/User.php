@@ -179,5 +179,26 @@ class User {
         return $ret;
     }
     
-    
+    /**
+     * delete
+     * @param Connection $connection
+     * @return boolean
+     */
+    public function delete(Connection $connection){
+        
+        if($this->id != -1){
+            
+            $sql = "DELETE FROM User WHERE id=$this->id";
+            
+            $result = $connection->query($sql);
+            
+                if($result == true){
+                    
+                    $this->id = -1;
+                    return true;
+                }
+            return false;
+        }
+        return true;
+    }
 }

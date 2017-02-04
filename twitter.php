@@ -24,13 +24,21 @@
 //    // loadAllUsers test
 //    var_dump(User::loadAllUsers($connection));
     
-    // saveToDB update test
-    $user = User::loadUserById($connection,40);
+//    // saveToDB update test
+//    $user = User::loadUserById($connection,40);
+//    var_dump($user);
+//    $user->setUsername('gosia9');  
+//    $user->saveToDB($connection);
+//    var_dump($user);    
+
+    // delete test
+    $user = User::loadUserById($connection,43);
     var_dump($user);
-    $user->setUsername('gosia9');  
-    $user->saveToDB($connection);
-    var_dump($user);    
-    
+    if (!is_null($user)) {
+        $user->delete($connection);
+        var_dump($user);
+    }
+         
 ?>
 
 <!DOCTYPE html>

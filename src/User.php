@@ -109,6 +109,20 @@ class User {
                 return true;
             }
         }
+        else{
+            // Update
+            $sql = "UPDATE User SET username='$this->username',
+                    email='$this->email',
+                    hashed_password='$this->hashedPassword'
+                    WHERE id=$this->id";
+            
+            $result = $connection->query($sql);
+            
+            if($result == true){
+                return true;
+            }
+        }
+
         return false;
     }
     
@@ -138,6 +152,11 @@ class User {
         return null;
     }
     
+    /**
+     * static loadAllUsers
+     * @param Connection $connection
+     * @return \User
+     */
     static public function loadAllUsers(Connection $connection){
         
         $sql = "SELECT * FROM User";
@@ -159,4 +178,6 @@ class User {
         }
         return $ret;
     }
+    
+    
 }

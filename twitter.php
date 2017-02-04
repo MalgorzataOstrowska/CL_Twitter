@@ -5,7 +5,7 @@
     $connection = new Connection();
 
     
-    // class User test
+//    // class User test
 //    $user = new User();
 //    $user->setUsername('gosia');
 //    $user->setEmail('gosia@gmail.com');
@@ -14,15 +14,23 @@
     
 //    $user = new User();
 //    $user->setUsername('gosia');
-//    $user->setEmail('gosia12@gmail.com');
+//    $user->setEmail('gosia13@gmail.com');
 //    $user->setPassword('gosiaPassword');
 //    $user->saveToDB($connection);
     
-    // loadUserById test
-    var_dump(User::loadUserById($connection,40));
+//    // loadUserById test
+//    var_dump(User::loadUserById($connection,40));
+
+//    // loadAllUsers test
+//    var_dump(User::loadAllUsers($connection));
     
-    // loadAllUsers test
-    var_dump(User::loadAllUsers($connection));
+    // saveToDB update test
+    $user = User::loadUserById($connection,40);
+    var_dump($user);
+    $user->setUsername('gosia9');  
+    $user->saveToDB($connection);
+    var_dump($user);    
+    
 ?>
 
 <!DOCTYPE html>

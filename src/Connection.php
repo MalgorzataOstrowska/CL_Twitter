@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Description of ConnectionToDatabase
+ * Description of Connection
  *
  * @author gosia
  */

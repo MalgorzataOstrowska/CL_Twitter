@@ -88,5 +88,28 @@ class User {
     public function getHashedPassword(){
         return $this->hashedPassword;
     }  
-   
+
+/******************************************************************************/
+    /**
+     * saveToDB
+     * @param Connection $connection
+     * @return boolean
+     */
+    public function saveToDB(Connection $connection){
+
+        if($this->id == -1){
+            //Saving new user to DB
+            $sql = "INSERT INTO User(username, email, hashed_password)
+                    VALUES ('$this->username', '$this->email', '$this->hashedPassword')";
+
+            $result = $connection->query($sql);
+            
+            if($result == true){
+                $this->id = $connection->mysqli->insert_id;                     // ???????????????????
+                return true;
+            }
+        }
+        return false;
+    }
+      
 }

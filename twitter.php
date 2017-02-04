@@ -3,7 +3,21 @@
     include_once 'library.php';    
     // Creation of a new connection:
     $connection = new Connection();
+
     
+    // class User test
+//    $user = new User();
+//    $user->setUsername('gosia');
+//    $user->setEmail('gosia@gmail.com');
+//    $user->setPassword('gosiaPassword');
+//    $user->saveToDB($connection);
+    
+    $user = new User();
+    $user->setUsername('gosia');
+    $user->setEmail('gosia12@gmail.com');
+    $user->setPassword('gosiaPassword');
+    $user->saveToDB($connection);
+        
 ?>
 
 <!DOCTYPE html>

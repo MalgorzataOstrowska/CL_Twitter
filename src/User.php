@@ -111,5 +111,24 @@ class User {
         }
         return false;
     }
-      
+    
+    static public function loadUserById(Connection $connection, $id){
+        
+        $sql = "SELECT * FROM User WHERE id=$id";
+        
+        $result = $connection->query($sql);
+        
+        if($result == true && $result->num_rows == 1){
+            
+            $row = $result->fetch_assoc();
+            $loadedUser = new User();
+            $loadedUser->id = $row['id'];
+            $loadedUser->username = $row['username'];
+            $loadedUser->hashedPassword = $row['hashed_password'];
+            $loadedUser->email = $row['email'];
+            
+            return $loadedUser;
+        }
+        return null;
+    }    
 }

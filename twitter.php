@@ -12,11 +12,14 @@
 //    $user->setPassword('gosiaPassword');
 //    $user->saveToDB($connection);
     
-    $user = new User();
-    $user->setUsername('gosia');
-    $user->setEmail('gosia12@gmail.com');
-    $user->setPassword('gosiaPassword');
-    $user->saveToDB($connection);
+//    $user = new User();
+//    $user->setUsername('gosia');
+//    $user->setEmail('gosia12@gmail.com');
+//    $user->setPassword('gosiaPassword');
+//    $user->saveToDB($connection);
+    
+    // loadUserById test
+    var_dump(User::loadUserById($connection,40));
         
 ?>
 

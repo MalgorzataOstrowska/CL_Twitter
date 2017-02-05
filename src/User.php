@@ -38,9 +38,9 @@ class User {
      * setUsername
      * @param string $newUsernamel
      */
-    public function setUsername($newUsernamel){
-        if (is_string($newUsernamel)) {
-            $this->username = $newUsernamel;
+    public function setUsername($newUsername){
+        if (is_string($newUsername)) {
+            $this->username = $newUsername;
         }
     }      
     
@@ -200,5 +200,37 @@ class User {
             return false;
         }
         return true;
+    }
+    
+    public function signUp(Connection $connection) {
+        if ($_SERVER['REQUEST_METHOD']==='POST') {
+
+            if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])){
+
+                $newUsername = trim($_POST['username']);
+                $newEmail = trim($_POST['email']);
+                $newPassword = trim($_POST['password']);
+                
+                if (is_string($newUsername) && is_string($newEmail) && is_string($newPassword) &&
+                    !empty($newUsername) && !empty($newEmail) && !empty($newPassword)) {
+                                 
+                    if (strpos($newEmail, '@')) {
+                        $this->setUsername($newUsername);
+                        $this->setEmail($newEmail);
+                        $this->setPassword($newPassword);
+                        $this->saveToDB($connection);
+                    }
+                    else{
+                        echo 'E-mail does not contain @';
+                    }
+                }
+                else{
+                    echo 'Incorrect data';
+                }
+            }
+            else{
+                echo 'Missing data';
+            }
+        }
     }
 }

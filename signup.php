@@ -1,17 +1,30 @@
+<?php
+include_once 'library.php';
+// Creation of a new connection:
+$connection = new Connection();
+
+$user = new User();
+$user->signUp($connection);
+?>
+
+
 <!DOCTYPE html>
 <html >
     <head>
         <meta charset="UTF-8">
         <title>Sign Up Form</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>        
-
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>        
+        
         <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
@@ -20,6 +33,7 @@
 
     <body>
         <?php include "src/navbar.html"; ?>
+
         <div class="form">
 
             <ul class="tab-group">
@@ -31,27 +45,27 @@
             <div id="signup">   
                 <h1>Sign Up for Free</h1>
 
-                <form action="/" method="post">
+                <form action="#" method="post">
 
                     <div class="field-wrap">
                         <label>
                             Username<span class="req">*</span>
                         </label>
-                        <input type="text"required autocomplete="off"/>
+                        <input type="text"required autocomplete="off" name="username"/>
                     </div>
 
                     <div class="field-wrap">
                         <label>
                             Email Address<span class="req">*</span>
                         </label>
-                        <input type="email"required autocomplete="off"/>
+                        <input type="email"required autocomplete="off" name="email"/>
                     </div>
 
                     <div class="field-wrap">
                         <label>
                             Set A Password<span class="req">*</span>
                         </label>
-                        <input type="password"required autocomplete="off"/>
+                        <input type="password"required autocomplete="off" name="password"/>
                     </div>
 
                     <button type="submit" class="button button-block"/>Get Started</button>
@@ -60,7 +74,16 @@
             </div>
         </div> <!-- /form -->
     </body>
-    
+    <script
+        src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src="js/signup_login.js"></script>
 </html>
+
+<?php
+// Destruction of the connection:
+$connection->close();
+$connection = null;
+?>

@@ -52,6 +52,7 @@ class User {
         if (is_string($newPassword)) {
             $newHashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
             $this->hashedPassword = $newHashedPassword;
+            return $this;
         }
     }   
 
@@ -202,6 +203,10 @@ class User {
         return true;
     }
     
+    /**
+     * signUp
+     * @param Connection $connection
+     */
     public function signUp(Connection $connection) {
         if ($_SERVER['REQUEST_METHOD']==='POST') {
 
@@ -222,6 +227,47 @@ class User {
                     }
                     else{
                         echo 'E-mail does not contain @';
+                    }
+                }
+                else{
+                    echo 'Incorrect data';
+                }
+            }
+            else{
+                echo 'Missing data';
+            }
+        }
+    }
+    
+    public function logIn(Connection $connection) {
+
+        if ($_SERVER['REQUEST_METHOD']==='POST') {
+
+            if (isset($_POST['email']) && isset($_POST['password'])){
+
+                $email = trim($_POST['email']);
+                $password = trim($_POST['password']);
+
+                if (is_string($email) && is_string($password) && !empty($email) && !empty($password)) {
+                                 
+                    $sql = "SELECT * FROM `User` WHERE `email` = '$email'";
+
+                    $result = $connection->query($sql);
+
+                    if($result == true && $result->num_rows == 1){
+
+                        $row = $result->fetch_assoc();
+                        $hash = $row['hashed_password'];
+                        
+                        if(password_verify($password, $hash)){
+                            echo 'Correct password ';
+                        }
+                        else{
+                            echo 'Incorrect password';
+                        }
+                    }
+                    else{
+                        echo 'Incorrect email';
                     }
                 }
                 else{

@@ -1,10 +1,27 @@
 <?php
     include_once 'library.php';
+    
     // Creation of a new connection:
     $connection = new Connection();
 
     $user = new User();
-    $user->logIn($connection);
+    
+    POST_function($connection, $user);
+    
+    function POST_function(Connection $connection, User $user) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['email']) && isset($_POST['password'])) {
+
+                $email = trim($_POST['email']);
+                $password = trim($_POST['password']);
+
+                $user->logIn($connection, $email, $password);
+            } else {
+                echo 'Missing data';
+            }
+        }
+    }
+
 ?>
 
 
@@ -62,11 +79,46 @@
 
                     <p class="forgot"><a href="#">Forgot Password?</a></p>
 
-                    <button type="submit" class="button button-block"/>Log In</button>
+                    <button type="submit" class="button button-block" id="submit"/>Log In</button>
 
                 </form>
             </div>
         </div> <!-- /form -->
+
+
+        
+        <div class="container">
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+            <!-- Modal -->
+            <div class="modal " id="myModal" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Modal Header</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>This is a large modal.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <?php
+            if (isset($_GET['incorrectPassword']) && $_GET['incorrectPassword'] === 'true') {
+                echo $message = "Incorrect password!";
+
+                $user->incorrectPassword();
+            }
+        ?>
+        
     </body>
     
     <script
@@ -74,7 +126,7 @@
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
     crossorigin="anonymous"></script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src="js/signup_login.js"></script>
+    <script src="js/login.js"></script>
 </html>
 
 <?php

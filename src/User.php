@@ -36,7 +36,7 @@ class User {
     
     /**
      * setUsername
-     * @param string $newUsernamel
+     * @param string $newUsername
      */
     public function setUsername($newUsername){
         if (is_string($newUsername)) {
@@ -207,76 +207,55 @@ class User {
      * signUp
      * @param Connection $connection
      */
-    public function signUp(Connection $connection) {
-        if ($_SERVER['REQUEST_METHOD']==='POST') {
+    public function signUp(Connection $connection, $newUsername, $newEmail, $newPassword) {
 
-            if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])){
+        if (is_string($newUsername) && is_string($newEmail) && is_string($newPassword) &&
+        !empty($newUsername) && !empty($newEmail) && !empty($newPassword)) {
 
-                $newUsername = trim($_POST['username']);
-                $newEmail = trim($_POST['email']);
-                $newPassword = trim($_POST['password']);
-                
-                if (is_string($newUsername) && is_string($newEmail) && is_string($newPassword) &&
-                    !empty($newUsername) && !empty($newEmail) && !empty($newPassword)) {
-                                 
-                    if (strpos($newEmail, '@')) {
-                        $this->setUsername($newUsername);
-                        $this->setEmail($newEmail);
-                        $this->setPassword($newPassword);
-                        $this->saveToDB($connection);
-                    }
-                    else{
-                        echo 'E-mail does not contain @';
-                    }
-                }
-                else{
-                    echo 'Incorrect data';
-                }
+            if (strpos($newEmail, '@')) {
+                $this->setUsername($newUsername);
+                $this->setEmail($newEmail);
+                $this->setPassword($newPassword);
+                $this->saveToDB($connection);
+            } else {
+                echo 'E-mail does not contain @';
             }
-            else{
-                echo 'Missing data';
+        } else {
+            echo 'Incorrect data';
+        }
+    }
+
+    public function logIn(Connection $connection, $email, $password) {
+
+        if (is_string($email) && is_string($password) && !empty($email) && !empty($password)) {
+
+            $sql = "SELECT * FROM `User` WHERE `email` = '$email'";
+
+            $result = $connection->query($sql);
+
+            if ($result == true && $result->num_rows == 1) {
+
+                $row = $result->fetch_assoc();
+                $hash = $row['hashed_password'];
+
+                if (password_verify($password, $hash)) {
+                    echo 'Correct password ';
+                    header('Location: twitter.php');
+                } else {
+                    echo 'Incorrect password';
+                    header('Location: login.php?incorrectPassword=true');
+                    $this->incorrectPassword();
+                }
+            } else {
+                echo 'Incorrect email';
             }
+        } else {
+            echo 'Incorrect data';
         }
     }
     
-    public function logIn(Connection $connection) {
+    public function incorrectPassword() {
 
-        if ($_SERVER['REQUEST_METHOD']==='POST') {
 
-            if (isset($_POST['email']) && isset($_POST['password'])){
-
-                $email = trim($_POST['email']);
-                $password = trim($_POST['password']);
-
-                if (is_string($email) && is_string($password) && !empty($email) && !empty($password)) {
-                                 
-                    $sql = "SELECT * FROM `User` WHERE `email` = '$email'";
-
-                    $result = $connection->query($sql);
-
-                    if($result == true && $result->num_rows == 1){
-
-                        $row = $result->fetch_assoc();
-                        $hash = $row['hashed_password'];
-                        
-                        if(password_verify($password, $hash)){
-                            echo 'Correct password ';
-                        }
-                        else{
-                            echo 'Incorrect password';
-                        }
-                    }
-                    else{
-                        echo 'Incorrect email';
-                    }
-                }
-                else{
-                    echo 'Incorrect data';
-                }
-            }
-            else{
-                echo 'Missing data';
-            }
-        }
     }
 }

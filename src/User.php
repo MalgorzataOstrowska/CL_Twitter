@@ -243,8 +243,7 @@ class User {
                     header('Location: twitter.php');
                 } else {
                     echo 'Incorrect password';
-                    header('Location: login.php?incorrectPassword=true');
-                    $this->incorrectPassword();
+                    header('Location: login.php?logIn=false');
                 }
             } else {
                 echo 'Incorrect email';
@@ -254,8 +253,4 @@ class User {
         }
     }
     
-    public function incorrectPassword() {
-
-
-    }
 }

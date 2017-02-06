@@ -60,6 +60,16 @@
 
             <div id="login">   
                 <h1>Welcome Back!</h1>
+                
+                <?php
+                    if (isset($_GET['logIn']) && $_GET['logIn'] === 'false') {
+                        echo '                
+                            <div id="login_error" class="alert alert-danger alert-dismissable fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <div class="error">Incorrect Email Address or Password</div>
+                            </div>';
+                    }
+                ?>
 
                 <form action="#" method="post">
 
@@ -86,38 +96,7 @@
         </div> <!-- /form -->
 
 
-        
-        <div class="container">
-            <!-- Trigger the modal with a button -->
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
-            <!-- Modal -->
-            <div class="modal " id="myModal" role="dialog">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Modal Header</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>This is a large modal.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        
-        <?php
-            if (isset($_GET['incorrectPassword']) && $_GET['incorrectPassword'] === 'true') {
-                echo $message = "Incorrect password!";
-
-                $user->incorrectPassword();
-            }
-        ?>
         
     </body>
     

@@ -240,14 +240,14 @@ class User {
 
                 if (password_verify($password, $hash)) {
                     echo 'Correct password ';
-                    header('Location: twitter.php');
+                    header('Location: ../public/index.html');
                 } else {
                     echo 'Incorrect password';
-                    header('Location: login.php?logIn=false');
+                    //header('Location: login.php?logIn=false');
                 }
             } else {
                 echo 'Incorrect email';
-                header('Location: login.php?logIn=false');
+                //header('Location: login.php?logIn=false');
             }
         } else {
             echo 'Incorrect data';

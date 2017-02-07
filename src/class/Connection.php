@@ -14,8 +14,9 @@ class Connection {
      */
     public function __construct(){
         
-        require 'configuration.php'; 
-        
+        require '../src/conf/configuration.php'; 
+
+//        require '../conf/configuration.php';
         // Creation of a new connection:
         $this->mysqli = new mysqli(
                                     $serverName,

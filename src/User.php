@@ -247,6 +247,7 @@ class User {
                 }
             } else {
                 echo 'Incorrect email';
+                header('Location: login.php?logIn=false');
             }
         } else {
             echo 'Incorrect data';

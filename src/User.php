@@ -5,8 +5,8 @@
  *
  * @author gosia
  */
-class User {
-    
+class User 
+{
     private $id;
     private $email;
     private $username;
@@ -15,7 +15,8 @@ class User {
     /**
      * __construct
      */
-    public function __construct() {
+    public function __construct() 
+    {
         $this->id = -1;
         $this->email = '';
         $this->username = '';
@@ -28,7 +29,8 @@ class User {
      * setEmail
      * @param string $newEmail
      */
-    public function setEmail($newEmail){
+    public function setEmail($newEmail)
+    {
         if (is_string($newEmail)) {
             $this->email = $newEmail;
         }
@@ -38,7 +40,8 @@ class User {
      * setUsername
      * @param string $newUsername
      */
-    public function setUsername($newUsername){
+    public function setUsername($newUsername)
+    {
         if (is_string($newUsername)) {
             $this->username = $newUsername;
         }
@@ -48,7 +51,8 @@ class User {
      * setPassword
      * @param string $newPassword
      */
-    public function setPassword($newPassword){
+    public function setPassword($newPassword)
+    {
         if (is_string($newPassword)) {
             $newHashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
             $this->hashedPassword = $newHashedPassword;
@@ -62,7 +66,8 @@ class User {
      * getId
      * @return int
      */
-    public function getId(){
+    public function getId()
+    {
         return $this->id;
     }  
     
@@ -70,7 +75,8 @@ class User {
      * getEmail
      * @return string
      */
-    public function getEmail(){
+    public function getEmail()
+    {
         return $this->email;
     }  
     
@@ -78,7 +84,8 @@ class User {
      * getUsername
      * @return string
      */
-    public function getUsername(){
+    public function getUsername()
+    {
         return $this->username;
     }  
     
@@ -86,7 +93,8 @@ class User {
      * getHashedPassword
      * @return string
      */
-    public function getHashedPassword(){
+    public function getHashedPassword()
+    {
         return $this->hashedPassword;
     }  
 
@@ -96,8 +104,8 @@ class User {
      * @param Connection $connection
      * @return boolean
      */
-    public function saveToDB(Connection $connection){
-
+    public function saveToDB(Connection $connection)
+    {
         if($this->id == -1){
             //Saving new user to DB
             $sql = "INSERT INTO User(username, email, hashed_password)
@@ -109,8 +117,8 @@ class User {
                 $this->id = $connection->mysqli->insert_id;                     // ???????????????????
                 return true;
             }
-        }
-        else{
+            
+        } else{
             // Update
             $sql = "UPDATE User SET username='$this->username',
                     email='$this->email',
@@ -133,8 +141,8 @@ class User {
      * @param int $id
      * @return \User
      */
-    static public function loadUserById(Connection $connection, $id){
-        
+    static public function loadUserById(Connection $connection, $id)
+    {
         $sql = "SELECT * FROM User WHERE id=$id";
         
         $result = $connection->query($sql);
@@ -158,8 +166,8 @@ class User {
      * @param Connection $connection
      * @return \User
      */
-    static public function loadAllUsers(Connection $connection){
-        
+    static public function loadAllUsers(Connection $connection)
+    {
         $sql = "SELECT * FROM User";
         $ret = [];
         $result = $connection->query($sql);
@@ -185,8 +193,8 @@ class User {
      * @param Connection $connection
      * @return boolean
      */
-    public function delete(Connection $connection){
-        
+    public function delete(Connection $connection)
+    {
         if($this->id != -1){
             
             $sql = "DELETE FROM User WHERE id=$this->id";
@@ -207,8 +215,8 @@ class User {
      * signUp
      * @param Connection $connection
      */
-    public function signUp(Connection $connection, $newUsername, $newEmail, $newPassword) {
-
+    public function signUp(Connection $connection, $newUsername, $newEmail, $newPassword) 
+    {
         if (is_string($newUsername) && is_string($newEmail) && is_string($newPassword) &&
         !empty($newUsername) && !empty($newEmail) && !empty($newPassword)) {
 
@@ -225,8 +233,8 @@ class User {
         }
     }
 
-    public function logIn(Connection $connection, $email, $password) {
-
+    public function logIn(Connection $connection, $email, $password) 
+    {
         if (is_string($email) && is_string($password) && !empty($email) && !empty($password)) {
 
             $sql = "SELECT * FROM `User` WHERE `email` = '$email'";
@@ -240,18 +248,18 @@ class User {
 
                 if (password_verify($password, $hash)) {
                     echo 'Correct password ';
-                    header('Location: ../public/index.html');
+                    //header('Location: ../public/home.html');
+                    header('Location: ../public/login.html?logIn=true');
                 } else {
                     echo 'Incorrect password';
-                    //header('Location: login.php?logIn=false');
+                    header('Location: ../public/login.html?logIn=false');
                 }
             } else {
                 echo 'Incorrect email';
-                //header('Location: login.php?logIn=false');
+                header('Location: ../public/login.html?logIn=false');
             }
         } else {
             echo 'Incorrect data';
         }
     }
-    
 }

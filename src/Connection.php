@@ -12,17 +12,15 @@ class Connection {
     /**
      * Constructor
      */
-    public function __construct(){
-        
-        require '../src/conf/configuration.php'; 
+    public function __construct($config){
 
 //        require '../conf/configuration.php';
         // Creation of a new connection:
         $this->mysqli = new mysqli(
-                                    $serverName,
-                                    $userName,
-                                    $password,
-                                    $databaseName
+                                    $config['servername'],
+                                    $config['username'],
+                                    $config['password'],
+                                    $config['database']
                                 );
         
         // Checking whether the connection succeeded

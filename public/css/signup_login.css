@@ -184,3 +184,7 @@ textarea {
     font-size: 1.8em;
     font-weight: bold;
 }
+
+#login_error{
+    display: none;
+}

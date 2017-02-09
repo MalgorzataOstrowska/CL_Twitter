@@ -46,30 +46,28 @@
         </nav>
         
         <div class="form">
-
             <ul class="tab-group">
                 <li><a href="signup.html">Sign Up</a></li>
                 <li class="tab active"><a href="#login">Log In</a></li>
             </ul>
 
-
             <div id="login">   
                 <h1>Welcome Back!</h1>
+<!-- ___________________________________________________________________________________________________________ -->
                 
                 <div id="login_error" class="alert alert-danger alert-dismissable fade in">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <div class="error">Incorrect Email Address or Password</div>
+                    <div class="error">{{ERROR}}</div>
                 </div>;
+<!-- ___________________________________________________________________________________________________________ -->
                 
                 <form action="login.php" method="post">
-
                     <div class="field-wrap">
                         <label>
                             Email Address<span class="req">*</span>
                         </label>
                         <input type="email" required autocomplete="off" name="email"/>
                     </div>
-
                     <div class="field-wrap">
                         <label>
                             Password<span class="req">*</span>

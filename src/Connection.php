@@ -12,9 +12,8 @@ class Connection {
     /**
      * Constructor
      */
-    public function __construct($config){
-
-//        require '../conf/configuration.php';
+    public function __construct($config)
+    {
         // Creation of a new connection:
         $this->mysqli = new mysqli(
                                     $config['servername'],
@@ -37,8 +36,8 @@ class Connection {
      * @param string $sql
      * @return bool
      */
-    public function query($sql){                                                // ????????????????
-        
+    public function query($sql)
+    {                                                // ????????????????
         $result = $this->mysqli->query($sql);
         
         if ($result == false) {
@@ -52,12 +51,10 @@ class Connection {
      * close
      * @return bool
      */
-    public function close(){                                                    // ????????????????
-        
+    public function close()
+    {                                                    // ????????????????
          $this->mysqli->close();
          echo '<br>Connection closed.';
-         
     }
-    
-   
+
 }

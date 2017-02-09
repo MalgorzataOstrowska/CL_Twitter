@@ -247,19 +247,23 @@ class User
                 $hash = $row['hashed_password'];
 
                 if (password_verify($password, $hash)) {
-                    echo 'Correct password ';
-                    //header('Location: ../public/home.html');
-                    header('Location: ../public/login.html?logIn=true');
+                    //echo 'Correct password ';
+
+                    return true;
                 } else {
-                    echo 'Incorrect password';
-                    header('Location: ../public/login.html?logIn=false');
+                    //echo 'Incorrect password';
+
+                    return false;
                 }
             } else {
-                echo 'Incorrect email';
-                header('Location: ../public/login.html?logIn=false');
+                //echo 'Incorrect email';
+
+                return false;
             }
         } else {
-            echo 'Incorrect data';
+            //echo 'Incorrect data';
+
+            return false;
         }
     }
 }

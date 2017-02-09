@@ -25,26 +25,47 @@ jQuery(function(){
 //    });
 //     
     
-//    jQuery.get("login.html?logIn=true", function() {
+//    jQuery.get("login.html?login=true", function() {
 //        console.log('true') ;
 //        LOGIN_ERROR.hide();
 //    });   
-//    
-//    jQuery.get("login.html?logIn=false", function() {
+//   
+//    jQuery.get("login.html?login=false", function() {
 //        console.log('false') ;
 //        LOGIN_ERROR.show();
 //    });
     
 
-jQuery.ajax({
-        url: 'login.html',
-        method: 'get',
-        data: {logIn: false},
-        success: function()
-        {
-//            LOGIN_ERROR.show();
-        }
-  });
+
+
+//    jQuery.get("login.php", function (data) {
+//        alert("Data Loaded: " + data);
+//    });
+
+
+
+
+//    jQuery.ajax({
+//        url: './login.php',
+////        data: 'login',
+//        data: {login: "false"},
+//        type: "GET",
+////        dataType: 
+//        
+//        success: function(login)
+//        {
+//            console.log(login) ;
+//            
+//            
+//            if(login == false){
+//                console.log('false') ;
+//                LOGIN_ERROR.show();
+//            } else {
+//                console.log('true') ;
+//                LOGIN_ERROR.hide();                
+//            }
+//        }
+//    });
     
 
 //$.ajax(
